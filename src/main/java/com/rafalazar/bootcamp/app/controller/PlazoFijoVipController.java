@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.rafalazar.bootcamp.app.document.PlazoFijoVip;
 import com.rafalazar.bootcamp.app.service.PlazoFijoVipService;
 
@@ -52,5 +54,16 @@ public class PlazoFijoVipController {
 					return service.delete(p)
 							.then(Mono.just(new ResponseEntity<Void>(HttpStatus.NO_CONTENT)));
 				}).defaultIfEmpty(new ResponseEntity<Void>(HttpStatus.NOT_FOUND));
+	}
+	
+	
+	//Esta es la forma correcta de actualizar - F!
+	@PutMapping("/update/{id}")
+	Mono<ResponseEntity<PlazoFijoVip>> update(@PathVariable String id, @RequestBody PlazoFijoVip pfijov) {
+		return service.update(pfijov, id)
+				.map(pfv -> ResponseEntity.created(URI.create("/plazoFijoVip".concat(pfv.getId())))
+						.contentType(MediaType.APPLICATION_JSON).body(pfv))
+				.defaultIfEmpty(ResponseEntity.notFound().build());
+				
 	}
 }

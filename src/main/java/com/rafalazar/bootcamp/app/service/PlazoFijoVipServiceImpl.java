@@ -26,10 +26,17 @@ public class PlazoFijoVipServiceImpl implements PlazoFijoVipService{
 	}
 
 	@Override
-	public Mono<PlazoFijoVip> update(PlazoFijoVip pfijov) {
-		return repo.findById(pfijov.getId())
-				.map(pv -> pfijov)
-				.flatMap(repo::save);
+	public Mono<PlazoFijoVip> update(PlazoFijoVip pfijov,String id) {
+		return repo.findById(id)
+				.flatMap(pfv -> {
+					pfv.setNameAccount(pfijov.getNameAccount());
+					pfv.setNumAccount(pfijov.getNumAccount());
+					pfv.setDniOwner(pfijov.getDniOwner());
+					pfv.setStatus(pfijov.getStatus());
+					pfv.setMonto(pfijov.getMonto());
+					
+					return repo.save(pfv);
+				});
 	}
 
 	@Override

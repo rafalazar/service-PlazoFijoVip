@@ -9,7 +9,7 @@ public interface PlazoFijoVipService {
 	
 	public Flux<PlazoFijoVip> findAll();
 	public Mono<PlazoFijoVip> findById(String id);
-	public Mono<PlazoFijoVip> update(PlazoFijoVip pfijov);
+	public Mono<PlazoFijoVip> update(PlazoFijoVip pfijov, String id);
 	public Mono<Void> delete(PlazoFijoVip pfijov);
 	public Mono<PlazoFijoVip> save(PlazoFijoVip pfijov);
 
