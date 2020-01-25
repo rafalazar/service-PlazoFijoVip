@@ -1,10 +1,11 @@
-package com.rafalazar.bootcamp.app.service;
+package com.rafalazar.bootcamp.app.Impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.rafalazar.bootcamp.app.document.PlazoFijoVip;
 import com.rafalazar.bootcamp.app.repository.PlazoFijoVipRepository;
+import com.rafalazar.bootcamp.app.service.PlazoFijoVipService;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
